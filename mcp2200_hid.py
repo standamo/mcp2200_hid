@@ -3,20 +3,20 @@ import fcntl
 import argparse
 
 hidraw_sys = "/sys/class/hidraw"
-hidraw_path = ""
 verbose = 0
 
-# Detect which /dev/hidrawX goes to MCP2200
-for filename in os.listdir(hidraw_sys):
-    # Check if the file is a symlink
-    if os.path.islink(os.path.join(hidraw_sys, filename)):
-        symlink_target = os.readlink(os.path.join(hidraw_sys, filename))
-        if '04D8:00DF' in symlink_target:
-            hidraw_path = f"/dev/{filename}"
-            if verbose:
-                print(f"Detected MCP2200: {hidraw_path}")
-
-if hidraw_path == "": exit(1)
+def detect_mcp2200():
+    # Detect which /dev/hidrawX goes to MCP2200
+    for filename in os.listdir(hidraw_sys):
+        # Check if the file is a symlink
+        if os.path.islink(os.path.join(hidraw_sys, filename)):
+            symlink_target = os.readlink(os.path.join(hidraw_sys, filename))
+            if '04D8:00DF' in symlink_target:
+                hidraw_path = f"/dev/{filename}"
+                if verbose:
+                    print(f"Detected MCP2200: {hidraw_path}")
+                return hidraw_path
+    return None
 
 def write_read(hidraw_file, write_content, read_len=0):
     # Write the data to the device
@@ -123,7 +123,12 @@ def main():
 
     if (args.Help):
         parser.print_help()
-        exit(0)    
+        exit(0)
+
+    hidraw_path = detect_mcp2200()
+    if not hidraw_path:
+        print("No MCP2200 connected? Try lsusb(1)")
+        exit(0)
 
     with open(hidraw_path, "wb+") as hidraw_file:
         # Acquire a lock on the HID device file
