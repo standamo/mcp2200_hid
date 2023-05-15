@@ -1,0 +1,10 @@
+#######################################
+# Groups
+#######################################
+  relays:
+    name: DenkoviRelays
+    entities:
+      - switch.dr_relay_1
+      - switch.dr_relay_2
+      - switch.dr_relay_3
+      - switch.dr_relay_4

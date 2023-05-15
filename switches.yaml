@@ -1,0 +1,26 @@
+  - platform: command_line
+    switches:
+      dr_relay_1:
+        friendly_name: "Relay 1"
+        unique_id: "dr_relay_1"
+        command_on: python3 /config/mcp2200_hid/mcp2200_hid.py -i 0
+        command_off: python3 /config/mcp2200_hid/mcp2200_hid.py -o 0
+        command_state: python3 /config/mcp2200_hid/mcp2200_hid.py -s 0
+      dr_relay_2:
+        friendly_name: "Relay 2"
+        unique_id: "dr_relay_2"
+        command_on: python3 /config/mcp2200_hid/mcp2200_hid.py -i 1
+        command_off: python3 /config/mcp2200_hid/mcp2200_hid.py -o 1
+        command_state: python3 /config/mcp2200_hid/mcp2200_hid.py -s 1
+      dr_relay_3:
+        friendly_name: "Relay 3"
+        unique_id: "dr_relay_3"
+        command_on: python3 /config/mcp2200_hid/mcp2200_hid.py -i 2
+        command_off: python3 /config/mcp2200_hid/mcp2200_hid.py -o 2
+        command_state: python3 /config/mcp2200_hid/mcp2200_hid.py -s 2
+      dr_relay_4:
+        friendly_name: "Relay 4"
+        unique_id: "dr_relay_4"
+        command_on: python3 /config/mcp2200_hid/mcp2200_hid.py -i 3
+        command_off: python3 /config/mcp2200_hid/mcp2200_hid.py -o 3
+        command_state: python3 /config/mcp2200_hid/mcp2200_hid.py -s 3
